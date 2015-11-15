@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:orientation="vertical"
+			  android:layout_width="fill_parent"
+			  android:layout_height="fill_parent"
+		>
+	<EditText
+			android:id="@+id/Rec_result"
+			android:layout_width="fill_parent"
+			android:layout_height="200dp"
+			/>
+
+	<Button android:id="@+id/start"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:text="开始识别"
+			/>
+	<Button
+			android:id="@+id/start_Diago"
+			android:text="对话框识别"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"/>
+	<Button
+			android:id="@+id/stop"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:text="暂停识别"
+			/>
+
+	<Button
+			android:id="@+id/Read_Text"
+			android:text="语音合成"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			/>
+</LinearLayout>
+
