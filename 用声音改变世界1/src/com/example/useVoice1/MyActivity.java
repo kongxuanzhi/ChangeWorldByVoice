@@ -2,10 +2,7 @@ package com.example.useVoice1;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -89,7 +86,7 @@ public class MyActivity extends Activity implements OnClickListener{
                     }else {
                         showTip(getString(R.string.text_begin));
                     }
-                }
+                }  //反对法
                 break;
             // 停止听写
             case R.id.iat_stop:
