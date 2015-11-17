@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.provider.Settings;
@@ -14,7 +15,7 @@ import android.widget.Toast;
 import com.iflytek.cloud.*;
 import com.iflytek.cloud.ui.RecognizerDialog;
 import com.iflytek.cloud.ui.RecognizerDialogListener;
-import com.iflytek.cloud.util.ResourceUtil;
+
 
 public class MyActivity extends Activity  implements View.OnClickListener {
     /**
@@ -27,16 +28,15 @@ public class MyActivity extends Activity  implements View.OnClickListener {
     private Toast mToast;
     AlertDialog.Builder b;
 
-//    String resPath = ResourceUtil.generateResourcePath(this, ResourceUtil.RESOURCE_TYPE.assets,
-//            "asr/common.jet")+ ";" + ResourceUtil.generateResourcePath(this, ResourceUtil.RESOURCE_TYPE.assets,
-//            "asr/sms_16k.jet");
-        String resPath = "";/*ResourceUtil.generateResourcePath(this,
-        ResourceUtil.RESOURCE_TYPE.path,"/sdcard/msc/res/asr/common.jet")+ ";" +
-        ResourceUtil.generateResourcePath(this, ResourceUtil.RESOURCE_TYPE.path,"/sdcard/msc/res/asr/sms_16 k.jet");*/
+    // resPath =  ResourceUtil.generateResourcePath(this, ResourceUtil.RESOURCE_TYPE.path, Environment.getExternalStorageDirectory()+"/msc/asr/common.jet")+ ";" +
+           // ResourceUtil.generateResourcePath(this, ResourceUtil.RESOURCE_TYPE.path,Environment.getExternalStorageDirectory()+"/msc/asr/sms_16k.jet");
+
+
     //缓冲进度
     private int mPercentForBuffering = 0;
     //播放进度
     private int mPercentForPlaying = 0;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,19 +56,15 @@ public class MyActivity extends Activity  implements View.OnClickListener {
 
         b = new AlertDialog.Builder(this).setTitle("没有可用的网络")
                 .setMessage("是否对网络进行设置？");
-        //加载本地引擎
-        StringBuffer param =new StringBuffer();
-        //加载识别本地资源， resPath为本地识别资源路径
-        param.append(ResourceUtil.ASR_RES_PATH+"="+resPath);
-        param.append(","+ResourceUtil.ENGINE_START+"=" +SpeechConstant.ENG_ASR);
-        SpeechUtility.getUtility().setParameter(ResourceUtil.ENGINE_START, String.valueOf(param));
-
         setUpandInitView();
+
     }
     private void setUpandInitView() {
         recognizer.setParameter(SpeechConstant.DOMAIN, "iat");
         recognizer.setParameter(SpeechConstant.LANGUAGE, "zh_cn");
         recognizer.setParameter(SpeechConstant.ACCENT, "mandarin ");
+
+
 
         //文字转语音的设置
         TextToVoice.setParameter(SpeechConstant.VOICE_NAME,"xiaoyan");
@@ -106,18 +102,15 @@ public class MyActivity extends Activity  implements View.OnClickListener {
                 TextToVoice.startSpeaking(editText.getText().toString(),mSynListener);
                 break;
             case R.id.recog_offLine:
-                recognizer.setParameter(ResourceUtil.ASR_RES_PATH,resPath);
                 recognizer.setParameter(SpeechConstant.ENGINE_TYPE,SpeechConstant.TYPE_LOCAL);
-                String [] fd =  SpeechUtility.getUtility().queryAvailableEngines();
-                if(fd==null){
-                    showTips("没有引擎");
-                }
-                recognizer.startListening(mRecoListener);
+                int ret = recognizer.startListening(mRecoListener);
                 break;
             case R.id.read_offLine:
                 break;
         }
     }
+
+
 
     //=============================================监听事件============================================
     //合成音频监听事件
