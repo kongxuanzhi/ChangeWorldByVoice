@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:orientation="vertical"
+			  android:layout_width="fill_parent"
+			  android:layout_height="fill_parent"
+		>
+	<ScrollView android:layout_width="match_parent" android:layout_height="fill_parent">
+	  <LinearLayout
+					  android:orientation="vertical"
+					  android:layout_width="fill_parent"
+					  android:layout_height="fill_parent"
+				>
+		<EditText
+				android:id="@+id/fileName"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:text="文件名称"
+				/>
+		<EditText
+				android:id="@+id/Content"
+				android:text="文件内容"
+				android:layout_width="match_parent" android:layout_height="150dp"
+				/>
+		<Button
+				android:id="@+id/writeToinner"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:text="写到手机内存里"
+				/>
+		<Button
+				android:id="@+id/writeToSdCard"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:text="写到手机SdCard里"
+				/>
+		<EditText
+				android:id="@+id/ReadResult"
+				android:layout_width="fill_parent" android:layout_height="70dp"/>
+		<Button
+				android:id="@+id/readFromInner"
+				android:text="从手机内存里读取"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+		<Button
+				android:id="@+id/readFromSdCard"
+				android:text="从手机SdCard里读取"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+		<Button
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:id="@+id/DeleteFileFromInner"
+				android:text="从手机内存上删除文件"/>
+		<Button
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:id="@+id/DeleteFileFromSdCard"
+				android:text="从SdCard上删除文件"/>
+	  </LinearLayout>
+		<!--/data/data/com.baoming.wenjanming-->
+	</ScrollView>
+
+</LinearLayout>
+
