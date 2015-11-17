@@ -32,5 +32,18 @@
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			/>
+
+	<Button
+			android:id="@+id/recog_offLine"
+			android:text="离线听写"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			/>
+	<Button
+			android:id="@+id/read_offLine"
+			android:text="离线朗读"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			/>
 </LinearLayout>
 

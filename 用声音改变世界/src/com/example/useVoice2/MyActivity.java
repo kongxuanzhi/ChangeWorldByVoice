@@ -10,11 +10,11 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.*;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.iflytek.cloud.*;
 import com.iflytek.cloud.ui.RecognizerDialog;
 import com.iflytek.cloud.ui.RecognizerDialogListener;
+import com.iflytek.cloud.util.ResourceUtil;
 
 public class MyActivity extends Activity  implements View.OnClickListener {
     /**
@@ -27,6 +27,12 @@ public class MyActivity extends Activity  implements View.OnClickListener {
     private Toast mToast;
     AlertDialog.Builder b;
 
+//    String resPath = ResourceUtil.generateResourcePath(this, ResourceUtil.RESOURCE_TYPE.assets,
+//            "asr/common.jet")+ ";" + ResourceUtil.generateResourcePath(this, ResourceUtil.RESOURCE_TYPE.assets,
+//            "asr/sms_16k.jet");
+        String resPath = "";/*ResourceUtil.generateResourcePath(this,
+        ResourceUtil.RESOURCE_TYPE.path,"/sdcard/msc/res/asr/common.jet")+ ";" +
+        ResourceUtil.generateResourcePath(this, ResourceUtil.RESOURCE_TYPE.path,"/sdcard/msc/res/asr/sms_16 k.jet");*/
     //缓冲进度
     private int mPercentForBuffering = 0;
     //播放进度
@@ -50,6 +56,13 @@ public class MyActivity extends Activity  implements View.OnClickListener {
 
         b = new AlertDialog.Builder(this).setTitle("没有可用的网络")
                 .setMessage("是否对网络进行设置？");
+        //加载本地引擎
+        StringBuffer param =new StringBuffer();
+        //加载识别本地资源， resPath为本地识别资源路径
+        param.append(ResourceUtil.ASR_RES_PATH+"="+resPath);
+        param.append(","+ResourceUtil.ENGINE_START+"=" +SpeechConstant.ENG_ASR);
+        SpeechUtility.getUtility().setParameter(ResourceUtil.ENGINE_START, String.valueOf(param));
+
         setUpandInitView();
     }
     private void setUpandInitView() {
@@ -61,7 +74,7 @@ public class MyActivity extends Activity  implements View.OnClickListener {
         TextToVoice.setParameter(SpeechConstant.VOICE_NAME,"xiaoyan");
         TextToVoice.setParameter(SpeechConstant.SPEED,"50");
         TextToVoice.setParameter(SpeechConstant.VOLUME,"80");
-        TextToVoice.setParameter(SpeechConstant.TTS_AUDIO_PATH,"./sdcard/iflytek.pcm");
+        TextToVoice.setParameter(SpeechConstant.TTS_AUDIO_PATH, "./sdcard/iflytek.pcm");
         TextToVoice.setParameter(SpeechConstant.ENGINE_TYPE,SpeechConstant.TYPE_CLOUD);
         //设置播放器音频流类型
         TextToVoice.setParameter(SpeechConstant.STREAM_TYPE,"3");
@@ -70,7 +83,8 @@ public class MyActivity extends Activity  implements View.OnClickListener {
         this.findViewById(R.id.start_Diago).setOnClickListener(this);
         this.findViewById(R.id.stop).setOnClickListener(this);
         this.findViewById(R.id.Read_Text).setOnClickListener(this);
-
+        this.findViewById(R.id.recog_offLine).setOnClickListener(this);
+        this.findViewById(R.id.read_offLine).setOnClickListener(this);
         editText = (EditText)this.findViewById(R.id.Rec_result);
     }
 
@@ -90,6 +104,17 @@ public class MyActivity extends Activity  implements View.OnClickListener {
                 break;
             case R.id.Read_Text:
                 TextToVoice.startSpeaking(editText.getText().toString(),mSynListener);
+                break;
+            case R.id.recog_offLine:
+                recognizer.setParameter(ResourceUtil.ASR_RES_PATH,resPath);
+                recognizer.setParameter(SpeechConstant.ENGINE_TYPE,SpeechConstant.TYPE_LOCAL);
+                String [] fd =  SpeechUtility.getUtility().queryAvailableEngines();
+                if(fd==null){
+                    showTips("没有引擎");
+                }
+                recognizer.startListening(mRecoListener);
+                break;
+            case R.id.read_offLine:
                 break;
         }
     }
@@ -160,6 +185,7 @@ public class MyActivity extends Activity  implements View.OnClickListener {
         @Override
         public void onError(SpeechError error) {
             showTips(error.getErrorDescription());
+            System.out.println(error.getErrorDescription());
         }
     };
 
@@ -189,6 +215,7 @@ public class MyActivity extends Activity  implements View.OnClickListener {
         public void onError(SpeechError speechError) {
           //  showTips(speechError.getErrorCode()+"");
             showTips(speechError.getErrorDescription());
+            System.out.println(speechError.getErrorDescription());
             //IsNetAccess(b);
         }
         @Override
