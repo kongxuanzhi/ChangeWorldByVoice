@@ -1,21 +1,17 @@
-package com.example.VoiceRecog.uilts;
+package com.example.VoiceRecog.functions;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ListActivity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.preference.DialogPreference;
-import android.text.TextWatcher;
-import android.view.LayoutInflater;
+
 import android.view.View;
 import android.widget.*;
 import com.example.VoiceRecog.R;
 import com.example.VoiceRecog.main;
+import com.example.VoiceRecog.uilts.operatorFile;
 
 import java.io.IOException;
 import java.util.*;
@@ -72,7 +68,6 @@ public class setBrowser extends Activity {
                                 }
                             }
                         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // TODO Auto-generated method stub
@@ -92,56 +87,6 @@ public class setBrowser extends Activity {
         maps.add(item);
         return maps;
     }
-//    class MyListAdapter extends BaseAdapter {
-//
-//        View items[];
-//        Context context;
-//        public MyListAdapter(Context context,Map<?,?> Data){
-//            this.context = context;
-//            int len = Data.size();
-//            items = new View[len];
-//            Iterator iter = Data.entrySet().iterator();
-//            int i = 0;
-//            while (iter.hasNext()){
-//                Map.Entry  entry = (Map.Entry)iter.next();
-//                items[i] = CreateView(entry);
-//                i++;
-//            }
-//        }
-//        public View CreateView(Map.Entry entry){
-//            String key = entry.getKey().toString();
-//            String value = entry.getValue().toString();
-//            LayoutInflater  inflater = (LayoutInflater)context
-//                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//            View view = null;
-//            view = inflater.inflate(R.layout.listitems,null);
-//            TextView title = (TextView)view.findViewById(R.id.title);
-//            TextView content = (TextView)view.findViewById(R.id.detail);
-//            title.setText(key);
-//            content.setText(value);
-//            return view;
-//        }
-//        @Override
-//        public int getCount() {
-//            return items.length;
-//        }
-//
-//        @Override
-//        public Object getItem(int i) {
-//            return items[i];
-//        }
-//
-//        @Override
-//        public long getItemId(int i) {
-//            return i;
-//        }
-//
-//        @Override
-//        public View getView(int i, View view, ViewGroup viewGroup) {
-//            return items[i];
-//        }
-//    }
-
     public void showTips(final String str){
         runOnUiThread(new Runnable() {
             @Override

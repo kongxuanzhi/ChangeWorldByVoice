@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:orientation="horizontal"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent">
+		<Button
+				android:id="@+id/browser"
+				android:text="语音浏览器"
+				android:layout_width="90dp"
+				android:layout_height="90dp"/>
+	    <Button
+				android:id="@+id/reader"
+				android:text="简单电子书阅读"
+				android:layout_width="90dp"
+				android:layout_height="90dp"
+				/>
+	<Button
+			android:id="@+id/talk"
+			android:text="聊天"
+			android:layout_width="90dp"
+			android:layout_height="90dp"
+			/>
+</LinearLayout>

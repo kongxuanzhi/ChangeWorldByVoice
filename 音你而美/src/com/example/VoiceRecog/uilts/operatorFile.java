@@ -62,7 +62,7 @@ public class operatorFile {
         outStream.write(Content.getBytes());
         outStream.flush();
         outStream.close();
-        Toast.makeText(context,"写入成功",Toast.LENGTH_SHORT).show();
+       // Toast.makeText(context,"写入成功",Toast.LENGTH_SHORT).show();
     }
 
     private String ReadFile(FileInputStream inputStream) throws IOException {
@@ -79,7 +79,7 @@ public class operatorFile {
         byte[] data= outputStream.toByteArray();
         inputStream.close();
         outputStream.close();
-        Toast.makeText(context, "读取成功", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(context, "读取成功", Toast.LENGTH_SHORT).show();
         return new String(data);
     }
 

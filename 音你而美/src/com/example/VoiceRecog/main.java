@@ -16,7 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 import com.example.VoiceRecog.uilts.JsonParser;
 import com.example.VoiceRecog.uilts.operatorFile;
-import com.example.VoiceRecog.uilts.setBrowser;
+import com.example.VoiceRecog.functions.setBrowser;
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
 import com.iflytek.cloud.RecognizerResult;
@@ -77,7 +77,7 @@ public class main extends Activity implements View.OnClickListener{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.setDefault:
-                showTips("点击了扫面音乐");
+               // showTips("点击了扫面音乐");
                 Intent set = new Intent(main.this,setBrowser.class);
                 startActivity(set);
                 break;
@@ -166,7 +166,7 @@ public class main extends Activity implements View.OnClickListener{
                 break;
             case R.id.voice:
             case R.id.search2:
-                showTips("打开对话框");
+                //showTips("打开对话框");
                 Recog_Dialog.setListener(recognizerDialogListener);
                 Recog_Dialog.show();
                 break;
