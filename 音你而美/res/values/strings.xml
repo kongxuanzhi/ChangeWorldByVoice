@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">音你而美</string>
+	<string name="appid">564201e5</string>
+	<string-array name="browsers">
+		<item>百度</item>
+		<item>必应</item>
+	</string-array>
+</resources>

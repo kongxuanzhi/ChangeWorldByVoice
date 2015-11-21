@@ -1,0 +1,77 @@
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+			   android:layout_width="match_parent"
+			   android:layout_height="match_parent"
+			   android:orientation="vertical">
+	<LinearLayout android:layout_width="fill_parent"
+				  android:background="#ff5470ff"
+				  android:layout_height="45dp" >
+		<RelativeLayout android:layout_width="fill_parent" android:layout_height="match_parent"
+						android:background="#ff8bdaff">
+			<Button android:id="@+id/voice"
+					android:layout_alignParentLeft="true"
+					android:layout_width="40dp"
+					android:layout_height="fill_parent"
+					android:background="@drawable/voice"/>
+			<EditText
+					android:id="@+id/search"
+					android:layout_margin="6dp"
+					android:background="#FFFFFF"
+					android:layout_toRightOf="@id/voice"
+					android:layout_width="fill_parent" android:layout_height="match_parent"
+					/>
+		</RelativeLayout>
+	</LinearLayout>
+	<LinearLayout android:layout_width="fill_parent"
+				  android:layout_height="fill_parent"
+				  android:layout_weight="1">
+		<WebView
+				android:id="@+id/webView"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"/>
+	</LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="45dp"
+				  android:background="#000000"
+			>
+		<Button
+				android:id="@+id/back"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:layout_weight="1"
+				android:layout_margin="8dp"
+				android:background="@drawable/back"
+				/>
+		<Button
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:layout_weight="1"
+				android:layout_margin="8dp"
+				android:background="@drawable/fd"
+				android:id="@+id/forward"
+				/>
+		<Button
+				android:id="@+id/search2"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:background="@drawable/voice"
+				android:layout_margin="1dp"
+				android:layout_weight="1"
+				android:focusable="true"
+				/>
+		<Button
+				android:id="@+id/refresh"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:layout_weight="1"
+				android:layout_margin="8dp"
+				android:background="@drawable/refresh"
+				/>
+		<Button
+				android:id="@+id/exit"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:layout_weight="1"
+				android:layout_margin="8dp"
+				android:background="@drawable/exit"
+				/>
+	</LinearLayout>
+</LinearLayout>
