@@ -6,18 +6,19 @@
 				  android:background="#ff5470ff"
 				  android:layout_height="45dp" >
 		<RelativeLayout android:layout_width="fill_parent" android:layout_height="match_parent"
-						android:background="#ff8bdaff">
+						android:background="#d12f83b4" android:clickable="true">
 			<Button android:id="@+id/voice"
 					android:layout_alignParentLeft="true"
 					android:layout_width="40dp"
 					android:layout_height="fill_parent"
-					android:background="@drawable/voice"/>
+					android:background="@drawable/select_voice"/>
 			<EditText
 					android:id="@+id/search"
 					android:layout_margin="6dp"
 					android:background="#FFFFFF"
 					android:layout_toRightOf="@id/voice"
 					android:layout_width="fill_parent" android:layout_height="match_parent"
+					android:textColor="#000000"
 					/>
 		</RelativeLayout>
 	</LinearLayout>
@@ -30,29 +31,29 @@
 				android:layout_height="fill_parent"/>
 	</LinearLayout>
 	<LinearLayout android:layout_width="fill_parent" android:layout_height="45dp"
-				  android:background="#000000"
-			>
+				  android:background="@android:color/white"
+				  >
 		<Button
 				android:id="@+id/back"
 				android:layout_width="fill_parent"
 				android:layout_height="fill_parent"
 				android:layout_weight="1"
 				android:layout_margin="8dp"
-				android:background="@drawable/back"
+				android:background="@drawable/select_back"
 				/>
 		<Button
 				android:layout_width="fill_parent"
 				android:layout_height="fill_parent"
 				android:layout_weight="1"
 				android:layout_margin="8dp"
-				android:background="@drawable/fd"
+				android:background="@drawable/select_fd"
 				android:id="@+id/forward"
 				/>
 		<Button
 				android:id="@+id/search2"
 				android:layout_width="fill_parent"
 				android:layout_height="fill_parent"
-				android:background="@drawable/voice"
+				android:background="@drawable/select_voice"
 				android:layout_margin="1dp"
 				android:layout_weight="1"
 				android:focusable="true"
@@ -63,7 +64,7 @@
 				android:layout_height="fill_parent"
 				android:layout_weight="1"
 				android:layout_margin="8dp"
-				android:background="@drawable/refresh"
+				android:background="@drawable/select_refresh"
 				/>
 		<Button
 				android:id="@+id/exit"
@@ -71,7 +72,7 @@
 				android:layout_height="fill_parent"
 				android:layout_weight="1"
 				android:layout_margin="8dp"
-				android:background="@drawable/exit"
+				android:background="@drawable/select_exit"
 				/>
 	</LinearLayout>
 </LinearLayout>

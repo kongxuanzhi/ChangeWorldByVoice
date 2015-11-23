@@ -5,5 +5,15 @@
 	<string-array name="browsers">
 		<item>百度</item>
 		<item>必应</item>
+		<item>淘宝</item>
+		<item>百度云盘搜索</item>
+		<item>bt天堂</item>
+	</string-array>
+	<string-array name="value">
+		<item>http://m.baidu.com/s?word=</item>
+		<item>http://cn.bing.com/search?q=</item>
+		<item>https://s.taobao.com/search?q=</item>
+		<item>http://m.baiduyunsou.com/s/</item>
+		<item>http://www.bttiantang.com/s.php?q=</item>
 	</string-array>
 </resources>

@@ -2,18 +2,19 @@ package com.example.VoiceRecog;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.*;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
+import com.example.VoiceRecog.functions.recource;
 import com.example.VoiceRecog.uilts.JsonParser;
 import com.example.VoiceRecog.uilts.operatorFile;
 import com.example.VoiceRecog.functions.setBrowser;
@@ -26,8 +27,9 @@ import com.iflytek.cloud.ui.RecognizerDialogListener;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
-public class main extends Activity implements View.OnClickListener{
+public class main extends Activity implements View.OnClickListener,View.OnTouchListener{
     /**
      * Called when the activity is first created.
      */
@@ -35,14 +37,16 @@ public class main extends Activity implements View.OnClickListener{
     MyWebViewClient client;
     EditText search;
     operatorFile opfile;
-    public static String url = "http://www.baidu.com/"; //从设置中得到
+    public static String url = "http://m.baidu.com/s?word="; //从设置中得到
     private View searchV;
     private RecognizerDialog Recog_Dialog;   //对话框语音识别成文字
     private Toast mToast;
+    public static Map<String,String> maps =null;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        maps = new recource(this).getBrowers();
         opfile =new operatorFile(this);
         try {
             loadEngine();
@@ -57,13 +61,11 @@ public class main extends Activity implements View.OnClickListener{
         File file = this.getFileStreamPath("browser.txt");
         if(file.exists()){
             String enginer =  opfile.ReadFromInner("browser.txt");
-            if(enginer.equals("必应")){
-                url ="http://cn.bing.com/search?q=";
+            for(String key:maps.keySet()){
+                if(key.equals(enginer)){
+                    url = maps.get(key);
+                }
             }
-            else{
-                url = "http://www.baidu.com/s?wd=";
-            }
-
         }
     }
 
@@ -80,6 +82,9 @@ public class main extends Activity implements View.OnClickListener{
                // showTips("点击了扫面音乐");
                 Intent set = new Intent(main.this,setBrowser.class);
                 startActivity(set);
+                break;
+            case R.id.exit2:
+                this.finish();
                 break;
         }
         return true;
@@ -125,7 +130,20 @@ public class main extends Activity implements View.OnClickListener{
         //显示网页
         mWebView = (WebView) this.findViewById(R.id.webView);
         mWebView.getSettings().setDefaultTextEncodingName("UTF-8");
+
+        //支持javascript
         mWebView.getSettings().setJavaScriptEnabled(true);
+        // 设置可以支持缩放
+        mWebView.getSettings().setSupportZoom(true);
+        // 设置出现缩放工具
+        mWebView.getSettings().setBuiltInZoomControls(true);
+        //扩大比例的缩放
+        mWebView.getSettings().setUseWideViewPort(true);
+        //自适应屏幕
+        mWebView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        mWebView.getSettings().setLoadWithOverviewMode(true);
+
+
         mWebView.getSettings().setSupportZoom(true);
         mWebView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
         mWebView.requestFocus();
@@ -157,7 +175,7 @@ public class main extends Activity implements View.OnClickListener{
     };
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+            switch (view.getId()){
             case R.id.forward:
                 mWebView.goForward();
                 break;
@@ -206,6 +224,62 @@ public class main extends Activity implements View.OnClickListener{
             }
         });
     }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        // TODO Auto-generated method stub
+        showTips(view.getId()+"");
+        switch (view.getId()){
+            case R.id.forward:
+                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
+                    view.setBackgroundResource(R.drawable.fd_2);
+                }else if(motionEvent.getAction()==MotionEvent.ACTION_UP){
+                    view.setBackgroundResource(R.drawable.fd_1);
+                }
+                break;
+            case R.id.back:
+                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
+                    view.setBackgroundResource(R.drawable.back_2);
+                }else if(motionEvent.getAction()==MotionEvent.ACTION_UP){
+                    view.setBackgroundResource(R.drawable.back_1);
+                }
+                break;
+            case R.id.voice:
+            case R.id.search2:
+                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
+                    view.setBackgroundResource(R.drawable.voice_2);
+                }else if(motionEvent.getAction()==MotionEvent.ACTION_UP){
+                    view.setBackgroundResource(R.drawable.voice_1);
+                }
+                break;
+            case R.id.refresh:
+                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
+                    view.setBackgroundResource(R.drawable.refresh_1);
+                }else if(motionEvent.getAction()==MotionEvent.ACTION_UP){
+                    view.setBackgroundResource(R.drawable.refresh_2);
+                }
+                break;
+            case R.id.exit:
+                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
+                    view.setBackgroundResource(R.drawable.exit_2);
+                }else if(motionEvent.getAction()==MotionEvent.ACTION_UP){
+                    view.setBackgroundResource(R.drawable.exit_1);
+                }
+                break;
+        }
+
+        return false;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        String path =  getFilesDir().getParent()+"/app_webview/Cache";
+        showTips(path);
+        File file = new File(path);
+        opfile.DeleteFiles(file);
+    }
+
     class MyWebViewClient extends WebViewClient{
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {

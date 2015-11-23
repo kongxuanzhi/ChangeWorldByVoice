@@ -12,8 +12,17 @@ import com.example.VoiceRecog.functions.Talk;
 public class startActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.start);
+        setUpView();
     }
+
+    private void setUpView() {
+        this.findViewById(R.id.browser).setOnClickListener(this);
+        this.findViewById(R.id.reader).setOnClickListener(this);
+        this.findViewById(R.id.talk).setOnClickListener(this);
+    }
+
 
     @Override
     public void onClick(View view) {

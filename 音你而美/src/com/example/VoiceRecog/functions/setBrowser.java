@@ -48,6 +48,7 @@ public class setBrowser extends Activity {
             }
             public void showItems(){
                 final String[] browsers = getResources().getStringArray(R.array.browsers);
+                final Map<String,String> maps = main.maps;
                 Dialog alertDialog = new AlertDialog.Builder(setBrowser.this).
                         setTitle("搜索引擎").
                         setIcon(R.drawable.ic_launcher)
@@ -60,11 +61,10 @@ public class setBrowser extends Activity {
                                     e.printStackTrace();
                                 }
                                 Toast.makeText(setBrowser.this, browsers[which], Toast.LENGTH_SHORT).show();
-                                if(browsers[which].equals("必应")){
-                                    main.url ="http://cn.bing.com/search?q=";
-                                }
-                                else{
-                                    main.url = "http://www.baidu.com/s?wd=";
+                                for(String key:maps.keySet()){
+                                    if(key.equals(browsers[which])){
+                                        main.url = maps.get(key);
+                                    }
                                 }
                             }
                         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
