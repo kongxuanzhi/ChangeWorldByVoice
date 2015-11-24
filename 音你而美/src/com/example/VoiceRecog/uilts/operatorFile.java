@@ -93,9 +93,9 @@ public class operatorFile {
                     file1[i].delete();
                 }
             }
-            Toast.makeText(context,"删除成功",Toast.LENGTH_SHORT).show();
+           // Toast.makeText(context,"删除成功",Toast.LENGTH_SHORT).show();
         }else {
-            Toast.makeText(context,"文件不存在",Toast.LENGTH_SHORT).show();
+           // Toast.makeText(context,"文件不存在",Toast.LENGTH_SHORT).show();
         }
     }
 }

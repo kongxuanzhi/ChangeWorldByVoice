@@ -29,7 +29,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-public class main extends Activity implements View.OnClickListener,View.OnTouchListener{
+public class main extends Activity implements View.OnClickListener{
     /**
      * Called when the activity is first created.
      */
@@ -155,6 +155,8 @@ public class main extends Activity implements View.OnClickListener,View.OnTouchL
         this.findViewById(R.id.forward).setOnClickListener(this);
         this.findViewById(R.id.search2).setOnClickListener(this);
         this.findViewById(R.id.refresh).setOnClickListener(this);
+        this.findViewById(R.id.exit).setOnClickListener(this);
+
         //this.findViewById(R.id.setDefault).setOnClickListener(this);
         client = new MyWebViewClient();
         mWebView.setWebViewClient(client);
@@ -226,56 +228,10 @@ public class main extends Activity implements View.OnClickListener,View.OnTouchL
     }
 
     @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        // TODO Auto-generated method stub
-        showTips(view.getId()+"");
-        switch (view.getId()){
-            case R.id.forward:
-                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
-                    view.setBackgroundResource(R.drawable.fd_2);
-                }else if(motionEvent.getAction()==MotionEvent.ACTION_UP){
-                    view.setBackgroundResource(R.drawable.fd_1);
-                }
-                break;
-            case R.id.back:
-                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
-                    view.setBackgroundResource(R.drawable.back_2);
-                }else if(motionEvent.getAction()==MotionEvent.ACTION_UP){
-                    view.setBackgroundResource(R.drawable.back_1);
-                }
-                break;
-            case R.id.voice:
-            case R.id.search2:
-                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
-                    view.setBackgroundResource(R.drawable.voice_2);
-                }else if(motionEvent.getAction()==MotionEvent.ACTION_UP){
-                    view.setBackgroundResource(R.drawable.voice_1);
-                }
-                break;
-            case R.id.refresh:
-                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
-                    view.setBackgroundResource(R.drawable.refresh_1);
-                }else if(motionEvent.getAction()==MotionEvent.ACTION_UP){
-                    view.setBackgroundResource(R.drawable.refresh_2);
-                }
-                break;
-            case R.id.exit:
-                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
-                    view.setBackgroundResource(R.drawable.exit_2);
-                }else if(motionEvent.getAction()==MotionEvent.ACTION_UP){
-                    view.setBackgroundResource(R.drawable.exit_1);
-                }
-                break;
-        }
-
-        return false;
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         String path =  getFilesDir().getParent()+"/app_webview/Cache";
-        showTips(path);
+       // showTips(path);
         File file = new File(path);
         opfile.DeleteFiles(file);
     }

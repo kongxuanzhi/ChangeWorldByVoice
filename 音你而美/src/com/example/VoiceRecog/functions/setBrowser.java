@@ -20,10 +20,10 @@ import java.util.*;
  * Created by 孔轩志 on 2015/11/21.
  */
 public class setBrowser extends Activity {
-    private static  List<Map<String, String>> maps =null;
+    private static  List<Map<String, String>> mapsTD =null;
+    final Map<String,String> maps = main.maps;
     ListView listView;
     Toast mToast;
-    Dialog alertDialog;
     operatorFile opfile;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,8 +32,8 @@ public class setBrowser extends Activity {
         listView = (ListView) this.findViewById(R.id.list);
         opfile = new operatorFile(this);
 
-        maps = loadData();
-        SimpleAdapter  simpleAdapter = new SimpleAdapter(this,maps,R.layout.listitems,
+        mapsTD = loadData();
+        SimpleAdapter  simpleAdapter = new SimpleAdapter(this,mapsTD,R.layout.listitems,
                 new String[]{"title","detail"},new int[]{R.id.title,R.id.detail}
         );
         listView.setAdapter(simpleAdapter);
@@ -48,7 +48,6 @@ public class setBrowser extends Activity {
             }
             public void showItems(){
                 final String[] browsers = getResources().getStringArray(R.array.browsers);
-                final Map<String,String> maps = main.maps;
                 Dialog alertDialog = new AlertDialog.Builder(setBrowser.this).
                         setTitle("搜索引擎").
                         setIcon(R.drawable.ic_launcher)
@@ -80,12 +79,12 @@ public class setBrowser extends Activity {
     }
 
     private List<Map<String, String>> loadData() {
-        List<Map<String, String>> maps = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> mapList = new ArrayList<Map<String, String>>();
         Map<String,String> item = new HashMap<String, String>();
         item.put("title", "默认搜索引擎");
-        item.put("detail", "百度，必应");
-        maps.add(item);
-        return maps;
+        item.put("detail", "百度，必应等搜索引擎");
+        mapList.add(item);
+        return mapList;
     }
     public void showTips(final String str){
         runOnUiThread(new Runnable() {
